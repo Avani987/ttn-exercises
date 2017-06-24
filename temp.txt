@@ -1,1 +1,0 @@
-This a test file whose contents are to be read.
