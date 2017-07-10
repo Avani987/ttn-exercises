@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="servlet">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="servlet">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sakila"/>
+    <schema id="7" parent="1" name="sales"/>
+    <schema id="8" parent="1" name="sampledb"/>
+    <schema id="9" parent="1" name="sys"/>
+    <schema id="10" parent="1" name="test"/>
+    <schema id="11" parent="1" name="user"/>
+    <schema id="12" parent="1" name="world"/>
+    <schema id="13" parent="1" name="bootcamp_db"/>
+    <schema id="14" parent="1" name="hibernatedb"/>
+    <table id="15" parent="2" name="addblog"/>
+    <table id="16" parent="2" name="login"/>
+    <column id="17" parent="15" name="blogId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="18" parent="15" name="uId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="19" parent="15" name="blogContent">
+      <Position>3</Position>
+      <DataType>varchar(1000)|0</DataType>
+    </column>
+    <index id="20" parent="15" name="uId">
+      <ColNames>uId</ColNames>
+    </index>
+    <key id="21" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>blogId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="22" parent="15" name="addblog_ibfk_1">
+      <ColNames>uId</ColNames>
+      <RefSchemaName>servlet</RefSchemaName>
+      <RefTableName>login</RefTableName>
+      <RefColNames>userId</RefColNames>
+    </foreign-key>
+    <column id="23" parent="16" name="userId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="24" parent="16" name="username">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="25" parent="16" name="password">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <index id="26" parent="16" name="username">
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="27" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>userId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="28" parent="16" name="username">
+      <ColNames>username</ColNames>
+      <UnderlyingIndexName>username</UnderlyingIndexName>
+    </key>
+  </database-model>
+</dataSource>
