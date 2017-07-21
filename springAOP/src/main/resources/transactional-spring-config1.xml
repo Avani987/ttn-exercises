@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="userDao" class="transactionexercise.dao.AccountDao1">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="loggingDao" class="transactionexercise.dao.transferDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="accountService" class="transactionexercise.service.AccountService1">
+        <property name="accountDao" ref="userDao"></property>
+        <property name="loggingService" ref="loggingService"></property>
+    </bean>
+
+    <bean id="loggingService" class="transactionexercise.service.transferLogService">
+        <property name="transfer" ref="loggingDao"></property>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/transactionexercise"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <!--<bean id="dbUtil"
+          class="transactionexercise.util.DbUtil"
+          init-method="initialize">
+        <property name="dataSource" ref="dataSource" />
+    </bean>-->
+
+    <bean id="transferdbUtil"
+          class="transactionexercise.util.transferDbUtil"
+          init-method="initialize">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+</beans>
